@@ -1,10 +1,5 @@
 from unittest import TestCase
-
-# I, V, X, C, M
-# XIX
-# MCCCMXCII
-# MDCCCCX = 1910
-# MCMLIV = 1954
+import random
 
 def convertRomanNumerals(romanNumerals):
     value = 0
@@ -31,6 +26,22 @@ def getValueForSymbol(romanSymbol):
                     "M": 1000
                     }[romanSymbol]
 
+def main():
+    latinQuotes = [
+                   'Alea jacta est',
+                   'Acvila non capit muscam',
+                   'Veni, vidi, vici',
+                   'aut viam inveniam aut faciam'
+                   ]
+    quoteIndex = random.randint(0, len(latinQuotes))
+    
+    print "Input a roman number:"
+    romanNumber = raw_input(latinQuotes[quoteIndex] + ' > ')
+    print "It means: ", convertRomanNumerals(romanNumber)
+    
+if(__name__ == "__main__"):
+    main()
+
 class RomanNumeralsTest(TestCase):
 
     valuesDictionary = {"I" : 1,
@@ -52,8 +63,6 @@ class RomanNumeralsTest(TestCase):
                         "CCCCCM" : 500,
                         "IIIIIV" : 0
                         }
-    
-    incorrectValues = ["IIV"]
     
     def testValues(self):
         actual = map(convertRomanNumerals, self.valuesDictionary.keys())
